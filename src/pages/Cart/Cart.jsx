@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux";
 import { CartFill as CartIcon, CreditCard, XCircleFill } from "react-bootstrap-icons"
+import { useNavigate } from "react-router-dom"
 import { decreaseQuantity, increaseQuantity, removeFromCart } from '../../features/cart/cart.mjs';
+
 
 const Cart = () => {
 
-
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart)
 
@@ -22,19 +24,21 @@ const Cart = () => {
 
     }, [cartItems])
 
-    const payNow = () => {
-        console.log("paying");
-    }
+    const payNow = async () => {
+        console.log("pay");
+    };
 
     return (
         <div className='cartContainer'>
-            <div className="padding"></div>
             <h3>Your Cart {cartItems.length > 0 ? `( ${cartItems.length} Items )` : "Items"}</h3>
             {
                 totalPrice > 0 ?
                     <div className='totalPriceCont'>
                         <h2 className='totalPriceOfAllProducts'>Total Price : ${totalPrice}</h2>
                         <button onClick={payNow} >Pay <CreditCard /></button>
+                        <button onClick={() => { navigate("/") }} 
+                        style={{marginLeft:"1em", width:"150px"}}
+                        >Shop More <CartIcon /></button>
                     </div>
                     : null
             }
@@ -47,7 +51,7 @@ const Cart = () => {
                         </h2>
                         :
                         cartItems.map((item) => (
-                            <div className='cartItem'>
+                            <div className='cartItem' style={{fontSize:"0.8em"}}>
                                 <img src={item.image} alt='img' />
                                 <h3>{item.name}</h3>
                                 <p className='price'>${item.price}</p>

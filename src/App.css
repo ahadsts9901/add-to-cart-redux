@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap");
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif, serif;
   box-sizing: border-box;
   outline: none!important;
 }
